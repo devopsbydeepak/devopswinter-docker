@@ -1,0 +1,30 @@
+---Build both images and compare---
+docker build -f Dockerfile.single -t demo:single .
+docker build -f Dockerfile -t demo:multi .
+docker images demo
+
+---start the Multi staged Container
+docker run -d --name demo -p 8080:8080 demo:multi
+curl http://localhost:8080/
+curl http://localhost:8080/health
+docker exec demo id
+
+---Inspect and Verify
+docker images demo
+docker history --no-trunc demo:multi
+docker image inspect demo:multi
+docker build --target builder -t demo:build -f Dockerfile .
+
+
+---Optional distroless or scratch experiment---
+
+docker build -f Dockerfile.scratch -t demo:scratch .
+docker images demo
+docker run -d --name demo-scratch -p 8081:8080 demo:scratch
+curl http://localhost:8081
+curl http://localhost:8081/health
+
+---cleanup---
+docker rm -f demo demo-scratch 2>/dev/null || true
+docker ps -a
+

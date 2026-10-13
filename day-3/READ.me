@@ -1,0 +1,10 @@
+YOUR MISSION
+Build a production-oriented Docker image for a small Go HTTP service. Compare a single-stage image with a multi-stage image,
+run the app as a non-root user, and prove the image-size reduction with real measurements.
+Learning outcomes
+• Explain why build tools and source code should not remain in the final runtime image.
+• Write and build a single-stage Dockerfile and a multi-stage Dockerfile.
+• Copy only the compiled artifact from a builder stage into a smaller runtime stage.
+• Run the application as a non-root user and verify the runtime identity.
+• Compare Alpine, slim, distroless, and scratch base-image trade-offs.
+• Document image sizes, tests, screenshots, and findings in a reproducible GitHub submission.
